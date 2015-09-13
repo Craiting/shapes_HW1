@@ -1,0 +1,49 @@
+{
+  "shapes": [
+    {
+      "id" : 1,
+      "type" : "circle",
+      "height": 8,
+      "width" : 8
+    },
+    {
+      "id" : 2,
+      "type": "non-circle",
+      "height": 2,
+      "width": 6
+    },
+    {
+      "id" : 3,
+      "type" : "square",
+      "height": 5,
+      "width": 5
+    },
+    {
+      "id": 4,
+      "type": "rectangle",
+      "height": 6,
+      "width": 3
+    },
+    {
+      "id" : 5,
+      "type" : "isosceles",
+      "angles": [40,40,100],
+      "base": 10,
+      "height": 4
+    },
+    {
+      "id" : 6,
+      "type" : "scalene",
+      "angles": [39, 94, 47],
+      "base": 3,
+      "height": 5
+    },
+    {
+      "id" : 7,
+      "type" : "Equillateral",
+      "angles": [60,60,60],
+      "base": 4,
+      "height": 4
+    }
+  ]
+}
