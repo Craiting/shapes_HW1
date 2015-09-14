@@ -2,7 +2,8 @@ from Shape import Shape
 
 
 class Rectangle(Shape):
-    def __init__(self):
+    def __init__(self, name, height, width):
+        super(Rectangle, self).__init__(name)
         self.height = None
         self.width = None
 
