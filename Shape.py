@@ -1,3 +1,3 @@
-class Shape:
-    def __init__(self, kind):
-        self.kind = "unknown"
+class Shape(object):
+    def __init__(self, name):
+        self.name = name

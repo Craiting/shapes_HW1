@@ -1,12 +1,86 @@
 import json
+import xml.etree.ElementTree as ET
+from lxml import etree
 
+def generateKey(element):
+    if element.attrib:
+        key = (element.tag, element.attrib)
+    else:
+	key = element.tag
+    return key
 
 def file_parser(ftype, name):
-    if(ftype == "json"):
-        try:
-            with open(name) as data_file:
+    try:
+        with open(name) as data_file:
+            if(ftype == "json"):
                 return json.load(data_file)
-        except Exception as e:
-            print e
-    elif(ftype == "xml"):
-        print "need to implement xml", name
+            elif(ftype == "xml"):
+                tree =  etree.parse(data_file)
+                root = tree.getroot()
+                dictA = {}
+                for r in root.getchildren():
+                    keyR = generateKey(r)
+                    if r.text:
+                        dictA[keyR] = r.text
+                    if r.getchildren():
+                        dictA[keyR] = r.getchildren()
+                newDict = {}
+                newDict[key] = dictA
+                print newDict
+                # print root[0][0].text
+                # return xmltodict.parse(data_file)
+    except Exception as e:
+        print e
+
+def area_organizer(shape_list):
+    total_area = 0
+    ellipse_area_total = 0
+    convexpolygon_area_total = 0
+    rectangle_area_total = 0
+    triangle_area_total = 0
+    circles_area = 0
+    non_circles_area = 0
+    square_area = 0
+    non_square_area = 0
+    isosceles_area = 0
+    scalene_area = 0
+    equillateral_area = 0
+
+
+    for s in shape_list:
+        total_area = total_area + s.get_area()
+        if s.name == 'Ellipse': ellipse_area_total = ellipse_area_total + s.get_area()
+        if s.name == 'Rectangle': rectangle_area_total = rectangle_area_total + s.get_area()
+        if s.name == 'Triangle': triangle_area_total = triangle_area_total + s.get_area()
+        if s.kind == 'circle': circles_area = circles_area + s.get_area()
+        if s.kind == 'non-circle': non_circles_area = non_circles_area + s.get_area()
+        if s.kind == 'square': square_area = square_area + s.get_area()
+        if s.kind == 'rectangle': non_square_area = non_square_area + s.get_area()
+        if s.kind == 'isosceles': isosceles_area = isosceles_area + s.get_area()
+        if s.kind == 'scalene': scalene_area = scalene_area + s.get_area()
+        if s.kind == 'equillateral': equillateral_area = equillateral_area + s.get_area()
+
+    convexpolygon_area_total = triangle_area_total + rectangle_area_total
+    return {'Ellipses':ellipse_area_total, 'Rectangles':rectangle_area_total,
+            'Triangles':triangle_area_total, 'Circles':circles_area,
+            'Non-Circles':non_circles_area, 'Squares': square_area,
+            'Non-Squares':non_square_area, 'Isosceles': isosceles_area,
+            'Scalenes':scalene_area, 'Equillaterals':equillateral_area,
+            'ConvexPolygons':convexpolygon_area_total, 'Total': total_area}
+
+def file_exporter(destination, area_dict):
+    if destination == 'screen':
+        print "Total area of all shapes: \t\t\t %s" % (area_dict['Total'])
+        print "\tEllipses: \t\t\t\t  %s" % (area_dict['Ellipses'])
+        print "\t\tCircles: \t\t\t  %s" % (area_dict['Circles'])
+        print "\t\tNon-circle Ellipses: \t\t  %s" % (area_dict['Non-Circles'])
+        print "\tConvex Polygons:\t\t\t  %s" % (area_dict['ConvexPolygons'])
+        print "\t\tTriangles: \t\t\t  %s" % (area_dict['Triangles'])
+        print "\t\t\tIsosceles: \t\t  %s" % (area_dict['Isosceles'])
+        print "\t\t\tScalenes: \t\t  %s" % (area_dict['Scalenes'])
+        print "\t\t\tEquillaterals: \t\t  %s" % (area_dict['Equillaterals'])
+        print "\t\tRectangles \t\t\t %s" % (area_dict['Rectangles'])
+        print "\t\t\tSquares \t\t %s" % (area_dict['Squares'])
+        print "\t\t\tNon-Squares \t\t %s" % (area_dict['Non-Squares'])
+    elif destination == 'file':
+        print 'csv stuff'
