@@ -2,33 +2,26 @@ import json
 import xml.etree.ElementTree as ET
 from lxml import etree
 
-def generateKey(element):
-    if element.attrib:
-        key = (element.tag, element.attrib)
-    else:
-	key = element.tag
-    return key
-
 def file_parser(ftype, name):
     try:
         with open(name) as data_file:
             if(ftype == "json"):
                 return json.load(data_file)
             elif(ftype == "xml"):
-                tree =  etree.parse(data_file)
-                root = tree.getroot()
-                dictA = {}
-                for r in root.getchildren():
-                    keyR = generateKey(r)
-                    if r.text:
-                        dictA[keyR] = r.text
-                    if r.getchildren():
-                        dictA[keyR] = r.getchildren()
-                newDict = {}
-                newDict[key] = dictA
-                print newDict
-                # print root[0][0].text
-                # return xmltodict.parse(data_file)
+                e = ET.parse(data_file)
+                root = e.getroot()
+                shapeDict = {}
+                shape_list =[]
+                for items in root:
+                    for shape in items:
+                        tempDict = {}
+                        for attr in shape:
+                            tempDict[attr.tag] = attr.text
+                        shape_list.append(tempDict)
+                shapeDict['shapes'] = shape_list
+                return shapeDict
+            else:
+                print "Invalid file type, choose (xml) or (json)"
     except Exception as e:
         print e
 
