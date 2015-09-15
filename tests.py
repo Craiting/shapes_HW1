@@ -16,6 +16,7 @@ class TestParsingMethods(unittest.TestCase):
         testxml = 'testxml.xml'
         xmltodict = file_parser('xml', testxml)
         self.assertEqual(type(xmltodict), type({}))
+        self.assertTrue(xmltodict['shapes'][0]['type'] == 'circle')
 
 
 class TestComputingArea(unittest.TestCase):
