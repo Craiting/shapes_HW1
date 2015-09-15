@@ -1,1 +1,2 @@
-This is homework number one of object oriented design
+## Homework 1
+### Craig Tingey

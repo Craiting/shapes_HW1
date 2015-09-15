@@ -1,0 +1,12 @@
+1,,Total area of all Shapes,137.69026041821002
+2,1,Ellipses,59.69026041821
+3,2,Circles,50.26548245744
+4,2,Non-Circle Ellipses,9.424777960770001
+5,1,Convex Polygons,78
+6,5,Triangles,35
+7,6,Isosceles,20
+8,6,Scalene,7
+9,6,Equillaterals,8
+10,5,Rectangles,43
+11,10,Squares,25
+12,10,Non-Square Rectangles,18

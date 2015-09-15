@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <shapes>
+        <element>
+            <height>8</height>
+            <id>1</id>
+            <type>circle</type>
+            <width>8</width>
+        </element>
+        <element>
+            <height>2</height>
+            <id>2</id>
+            <type>non-circle</type>
+            <width>6</width>
+        </element>
+        <element>
+            <height>5</height>
+            <id>3</id>
+            <type>square</type>
+            <width>5</width>
+        </element>
+    </shapes>
+</root>

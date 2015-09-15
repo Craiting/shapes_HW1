@@ -1,6 +1,6 @@
 import json
 import xml.etree.ElementTree as ET
-from lxml import etree
+import csv
 
 def file_parser(ftype, name):
     try:
@@ -38,8 +38,6 @@ def area_organizer(shape_list):
     isosceles_area = 0
     scalene_area = 0
     equillateral_area = 0
-
-
     for s in shape_list:
         total_area = total_area + s.get_area()
         if s.name == 'Ellipse': ellipse_area_total = ellipse_area_total + s.get_area()
@@ -76,4 +74,17 @@ def file_exporter(destination, area_dict):
         print "\t\t\tSquares \t\t %s" % (area_dict['Squares'])
         print "\t\t\tNon-Squares \t\t %s" % (area_dict['Non-Squares'])
     elif destination == 'file':
-        print 'csv stuff'
+        with open('output.csv', 'wb') as csvfile:
+            fwriter = csv.writer(csvfile, delimiter=',')
+            fwriter.writerow(['1','','Total area of all Shapes', area_dict['Total']])
+            fwriter.writerow(['2','1','Ellipses', area_dict['Ellipses']])
+            fwriter.writerow(['3','2','Circles', area_dict['Circles']])
+            fwriter.writerow(['4','2','Non-Circle Ellipses', area_dict['Non-Circles']])
+            fwriter.writerow(['5','1','Convex Polygons', area_dict['ConvexPolygons']])
+            fwriter.writerow(['6','5','Triangles', area_dict['Triangles']])
+            fwriter.writerow(['7','6','Isosceles', area_dict['Isosceles']])
+            fwriter.writerow(['8','6','Scalene', area_dict['Scalenes']])
+            fwriter.writerow(['9','6','Equillaterals', area_dict['Equillaterals']])
+            fwriter.writerow(['10','5','Rectangles', area_dict['Rectangles']])
+            fwriter.writerow(['11','10','Squares', area_dict['Squares']])
+            fwriter.writerow(['12','10','Non-Square Rectangles', area_dict['Non-Squares']])
